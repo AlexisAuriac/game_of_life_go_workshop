@@ -1,8 +1,8 @@
 package main
 
 import (
-    "unsafe"
     "syscall"
+    "unsafe"
 )
 
 type winsize struct {
@@ -12,6 +12,7 @@ type winsize struct {
     Ypixel uint16
 }
 
+// GetDims recuperates the dimensions of the terminal
 func GetDims() (int, int) {
     ws := &winsize{}
     retCode, _, errno := syscall.Syscall(syscall.SYS_IOCTL,
