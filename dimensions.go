@@ -23,5 +23,6 @@ func GetDims() (int, int) {
     if int(retCode) == -1 {
         panic(errno)
     }
+
     return int(ws.Col), int(ws.Row)
 }
