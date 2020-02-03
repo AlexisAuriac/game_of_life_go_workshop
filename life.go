@@ -38,15 +38,20 @@ func (l *Life) Step() {
 // String returns the game board as a string.
 func (l *Life) String() string {
     var buf bytes.Buffer
+
     for y := 0; y < l.h; y++ {
         for x := 0; x < l.w; x++ {
-            b := byte(' ')
             if l.a.Alive(x, y) {
-                b = '*'
+                buf.WriteString("\033[1;42m ")
+            } else {
+                buf.WriteString("\033[0;41m ")
             }
-            buf.WriteByte(b)
+
+            buf.WriteString("\033[0m")
         }
+
         buf.WriteByte('\n')
     }
+
     return buf.String()
 }
