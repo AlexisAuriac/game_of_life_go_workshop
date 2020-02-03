@@ -18,7 +18,7 @@ func main() {
 	rand.Seed(time.Now().UTC().UnixNano())
 
 	w, h := GetDims()
-	l := NewLife(w, h-1)
+	l := NewLife(w, h-1, args.colorAlive, args.colorDead)
 
 	for {
 		l.Step()

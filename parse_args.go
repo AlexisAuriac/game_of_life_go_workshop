@@ -10,14 +10,29 @@ import (
 	"strings"
 )
 
+var colors = map[string]string{
+	"black":  "\033[1;40m",
+	"red":    "\033[1;41m",
+	"green":  "\033[1;42m",
+	"yellow": "\033[1;43m",
+	"blue":   "\033[1;44m",
+	"purple": "\033[1;45m",
+	"cyan":   "\033[1;46m",
+	"white":  "\033[1;47m",
+}
+
 // ParsedArguments represents the parsed arguments
 type ParsedArguments struct {
-	speed uint64
+	speed      uint64
+	colorAlive string
+	colorDead  string
 }
 
 func newParsedArguments() *ParsedArguments {
 	return &ParsedArguments{
-		speed: 30,
+		speed:      30,
+		colorAlive: colors["green"],
+		colorDead:  colors["red"],
 	}
 }
 
@@ -42,6 +57,28 @@ var arguments = [...]argument{
 
 			parsedArgs.speed = speed
 			return err
+		},
+	},
+	argument{
+		name: "alive",
+		parser: func(parsedArgs *ParsedArguments, arg string) error {
+			if val, ok := colors[arg]; ok {
+				parsedArgs.colorAlive = val
+				return nil
+			}
+
+			return fmt.Errorf("%s: Invalid color", arg)
+		},
+	},
+	argument{
+		name: "dead",
+		parser: func(parsedArgs *ParsedArguments, arg string) error {
+			if val, ok := colors[arg]; ok {
+				parsedArgs.colorDead = val
+				return nil
+			}
+
+			return fmt.Errorf("%s: Invalid color", arg)
 		},
 	},
 }
