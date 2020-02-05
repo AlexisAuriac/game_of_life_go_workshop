@@ -90,7 +90,7 @@ func ParseArgs() (*ParsedArguments, error) {
 
 	for _, arg := range args {
 		for _, i := range arguments {
-			match := fmt.Sprintf("^--%s=", i.name)
+			match := fmt.Sprintf("^--%s=?", i.name)
 			matched, _ := regexp.MatchString(match, args[0])
 
 			if !matched {
