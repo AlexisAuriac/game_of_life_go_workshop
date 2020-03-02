@@ -15,8 +15,8 @@ func main() {
 	n := uint64(rand.Intn(100))
 
 	if n < p {
-		fmt.Println("1")
+		fmt.Println("A")
 	} else {
-		fmt.Println("0")
+		fmt.Println("B")
 	}
 }
